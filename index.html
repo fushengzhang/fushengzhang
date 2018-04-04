@@ -1,46 +1,90 @@
 <!DOCTYPE html>
+<!--suppress JSUnresolvedLibraryURL -->
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
     <title>项目开发辅助工具</title>
-    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet"/>
-    <script src="/js/jquery.min.js"></script>
+
+    <script src="http://www.git.zhangfusheng.cn/js/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<div>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span12">
-                <form class="form-horizontal">
-                    <div class="control-group">
-                        <label class="control-label" for="inputEmail">邮箱</label>
-                        <div class="controls">
-                            <input id="inputEmail" type="text"/>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="inputPassword">密码</label>
-                        <div class="controls">
-                            <input id="inputPassword" type="password"/>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="controls">
-                            <label class="checkbox"><input type="checkbox"/> Remember me</label>
-                            <button type="submit" class="btn">登陆</button>
-                        </div>
-                    </div>
-                </form>
+<div class="container-fluid center-block" style="width: 50%;padding-top: 10px">
+    <form class="form-horizontal col-xs-11" id="dataSourceProperties">
+        <div class="form-group">
+            <label for="url" class="col-sm-2 control-label">url</label>
+            <div class="col-sm-7">
+                <input type="email" class="form-control" id="url" placeholder="url">
             </div>
         </div>
-    </div>
-</div>
-<div>
-    <div>
-        <form id="dataSourceProperties">
-            <label></label>
-        </form>
-    </div>
+        <div class="form-group">
+            <label for="tableSchema" class="col-sm-2 control-label">tableSchema</label>
+            <div class="col-sm-7">
+                <input type="password" class="form-control" id="tableSchema" name="tableSchema"
+                       placeholder="tableSchema 数据库名称">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label">username</label>
+            <div class="col-sm-7">
+                <input type="password" class="form-control" id="username" name="username" placeholder="username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">password</label>
+            <div class="col-sm-7">
+                <input type="password" class="form-control" id="password" name="password" placeholder="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="driverClassName" class="col-sm-2 control-label">driverClassName</label>
+            <div class="col-sm-7">
+                <input type="password" class="form-control" id="driverClassName" name="driverClassName"
+                       placeholder="driverClassName">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-7">
+                <button type="button" id="testConnection" class="btn btn-default">测试连接</button>
+            </div>
+        </div>
+    </form>
 </div>
 </body>
+<script>
+    $(function () {
+        $("#testConnection").click(function () {
+            var param = $("#dataSourceProperties").serialize();
+            $.ajax({
+                url: 'www.zuul.zhangfusheng.cn/datasourece-server/testConnection',
+                contentType: "application/json; charset=utf-8",
+                data: param,
+                type: "post",
+                cache: false,//false是不缓存，true为缓存
+                async: true,//true为异步，false为同步
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+                    alert("成功" + submitData)
+                },
+                complete: function () {
+                    //请求结束时
+                },
+                error: function () {
+                    //请求失败时
+                }
+            })
+        })
+    })
+</script>
 </html>
