@@ -2,133 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>项目部署系统</title>
+    <title>项目开发辅助工具</title>
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <script src="/js/jquery.min.js"></script>
 </head>
 <body>
-<div style="padding: 20px;">
-    <h2 class="text-center">h2. Bootstrap heading<small>Secondary text</small></h2>
-    <div  id="tomcat1" class="col-sm-3 panel panel-default panel-success">
-        <label class="label" style="color: chartreuse">1</label><label style="color: chartreuse">号</label>
-        <form class="form-horizontal" >
-            <div class="form-group">
-                <label for="tomcatRootPath" class="col-sm-5 control-label">tomcat root path:</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control" name="tomcatRootPath" id="tomcatRootPath" placeholder="tomcat的根路径"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="tomcatName" class="col-sm-5 control-label">tomcat name:</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control" name="tomcatName" id="tomcatName" placeholder="8080-tomcat-name"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="webapps" class="col-sm-5 control-label">webApps:</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control" name="webapps" id="webapps" value="webapps" placeholder="webapps"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="tomcatPort" class="col-sm-5 control-label">tomcat port:</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control" name="tomcatPort" id="tomcatPort" placeholder="8080"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="tomcatEncoding" class="col-sm-5 control-label">tomcat encoding:</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control" name="tomcatEncoding" id="tomcatEncoding" value="UTF-8" placeholder="UTF-8"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="tomcatStartPath" class="col-sm-5 control-label">tomcat start path:</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control" name="tomcatStartPath" id="tomcatStartPath" value="bin/start.sh" placeholder="bin/start.sh"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="projectName" class="col-sm-5 control-label">project root path:</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control" name="projectRootPath" id="projectRootPath" placeholder="project root path"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="projectName" class="col-sm-5 control-label">project name:</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control" name="projectName" id="projectName" placeholder="project name"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="projectPath" class="col-sm-5 control-label">project url path:</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control" name="projectPath" id="projectPath" value="/" placeholder="/"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="projectLog" class="col-sm-5 control-label">project log file path:</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control" name="projectLog" id="projectLog" placeholder="project log file path"/>
-                </div>
-            </div>
+<div>
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">Home</a></li>
+        <li role="presentation"><a href="#">项目初始化</a></li>
+        <li role="presentation"><a href="#">项目部署</a></li>
+    </ul>
+</div>
+<div>
+    <div>
+        <form id="dataSourceProperties">
+            <label></label>
         </form>
-    </div>
-    <div class="col-sm-2 navbar navbar-default navbar-fixed-bottom center-block">
-        <button type="button" id="add" class="btn col-sm-6 btn-default navbar-btn">添加</button>
-        <button type="button" id="sub" class="btn col-sm-6 btn-default navbar-btn">部署</button>
     </div>
 </div>
 </body>
-<script>
-    $(function () {
-        var tomcatNum = 2;
-        $("#add").click(function () {
-            $("#tomcat" + (tomcatNum - 1)).before('<div id="tomcat' + tomcatNum + '" class="col-sm-3 panel panel-default panel-success">' + $("#tomcat1").html() + '</div>')
-            if (tomcatNum % 4 == 1) {
-                $("html,body").animate({scrollTop: $("#tomcat" + (tomcatNum - 1)).offset().top + $("#tomcat" + (tomcatNum - 1)).height() * tomcatNum / 4}, 10);
-            }
-            $("#tomcat" + tomcatNum + " > .label").text(tomcatNum);
-            $("#tomcat" + tomcatNum + " > form > div > div > #tomcatRootPath").val($("#tomcat" + (tomcatNum - 1) + " > form > div > div > #tomcatRootPath").val());
-            $("#tomcat" + (tomcatNum - 1) + " > form > div > div > #projectRootPath").val($("#tomcat" + (tomcatNum - 1) + " > form > div > div > #projectRootPath").val());
-            tomcatNum += 1;
-        });
-
-        $("#sub").click(function () {
-            var submitData = new Array();
-            var tomcatNum_bak = tomcatNum - 1;
-            for (tomcatNum_bak; tomcatNum_bak > 0; tomcatNum_bak --) {
-                submitData[tomcatNum_bak - 1] = strToObj($('#tomcat' + tomcatNum_bak +' form').serialize());
-            }
-            $.ajax({
-                url: '/tomcat/addConfig',
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(submitData),
-                type: "post",
-                cache: false,//false是不缓存，true为缓存
-                async: true,//true为异步，false为同步
-                beforeSend: function () {
-
-                },
-                success: function (result) {
-                    alert("成功" + submitData)
-                },
-                complete: function () {
-                    //请求结束时
-                },
-                error: function () {
-                    //请求失败时
-                }
-            })
-        });
-    });
-
-    function strToObj(str){
-        str = str.replace(/&/g,"','");
-        str = str.replace(/=/g,"':'");
-        str = "({'"+str +"'})";
-        obj = eval(str);
-        return obj;
-    }
-</script>
 </html>
