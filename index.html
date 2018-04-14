@@ -5,7 +5,7 @@
     <meta charset="UTF-8"/>
     <title>项目开发辅助工具</title>
 
-    <script src="http://www.git.zhangfusheng.cn/js/jquery.min.js"></script>
+    <script src="http://www.me.zhangfusheng.cn/js/jquery.min.js"></script>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -16,75 +16,48 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+    <style>
+        .leftHeight{
+            width: 100%;
+        }
+
+        .regihtHeight{
+            width: 100%;
+        }
+
+        .zHeight{
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-<div class="container-fluid center-block" style="width: 50%;padding-top: 10px">
-    <form class="form-horizontal col-xs-11" id="dataSourceProperties">
-        <div class="form-group">
-            <label for="url" class="col-sm-2 control-label">url</label>
-            <div class="col-sm-7">
-                <input type="email" class="form-control" id="url" placeholder="url">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="tableSchema" class="col-sm-2 control-label">tableSchema</label>
-            <div class="col-sm-7">
-                <input type="password" class="form-control" id="tableSchema" name="tableSchema"
-                       placeholder="tableSchema 数据库名称">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="username" class="col-sm-2 control-label">username</label>
-            <div class="col-sm-7">
-                <input type="password" class="form-control" id="username" name="username" placeholder="username">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password" class="col-sm-2 control-label">password</label>
-            <div class="col-sm-7">
-                <input type="password" class="form-control" id="password" name="password" placeholder="password">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="driverClassName" class="col-sm-2 control-label">driverClassName</label>
-            <div class="col-sm-7">
-                <input type="password" class="form-control" id="driverClassName" name="driverClassName"
-                       placeholder="driverClassName">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-7">
-                <button type="button" id="testConnection" class="btn btn-default">测试连接</button>
-            </div>
-        </div>
-    </form>
-</div>
-</body>
-<script>
-    $(function () {
-        $("#testConnection").click(function () {
-            var param = $("#dataSourceProperties").serialize();
-            $.ajax({
-                url: 'www.zuul.zhangfusheng.cn/datasourece-server/testConnection',
-                contentType: "application/json; charset=utf-8",
-                data: param,
-                type: "post",
-                cache: false,//false是不缓存，true为缓存
-                async: true,//true为异步，false为同步
-                beforeSend: function () {
 
-                },
-                success: function (result) {
-                    alert("成功" + submitData)
-                },
-                complete: function () {
-                    //请求结束时
-                },
-                error: function () {
-                    //请求失败时
-                }
-            })
-        })
-    })
-</script>
+<div class="row">
+    <div class="col-xs-12" style="height: 50%">
+        <div class="col-xs-3">
+            <img class="leftHeight" src="http://fdfsserver.zhangfusheng.cn/group1/M00/00/00/rBUAEFrGCACARJrNAARLm-2L2m4440_big.jpg"/>
+        </div>
+        <div class="col-xs-6">
+            <img class="zHeight" src="http://fdfsserver.zhangfusheng.cn/group1/M00/00/00/rBUAEFrGCACARJrNAARLm-2L2m4440_big.jpg"/>
+        </div>
+        <div class="col-xs-3">
+            <img class="regihtHeight" src="http://fdfsserver.zhangfusheng.cn/group1/M00/00/00/rBUAEFrGCACARJrNAARLm-2L2m4440_big.jpg"/>
+        </div>
+    </div>
+    <div class="col-xs-12" style="height: 1px;width: 100%;border: #0f0f0f solid"/>
+    <div class="col-xs-12" style="height: 50%">
+        <div class="col-xs-3">
+            <img class="leftHeight" src="http://fdfsserver.zhangfusheng.cn/group1/M00/00/00/rBUAEFrGCACARJrNAARLm-2L2m4440_big.jpg"/>
+        </div>
+        <div class="col-xs-6">
+            <img class="zHeight" src="http://fdfsserver.zhangfusheng.cn/group1/M00/00/00/rBUAEFrGCACARJrNAARLm-2L2m4440_big.jpg"/>
+        </div>
+        <div class="col-xs-3">
+            <img class="regihtHeight" src="http://fdfsserver.zhangfusheng.cn/group1/M00/00/00/rBUAEFrGCACARJrNAARLm-2L2m4440_big.jpg"/>
+        </div>
+    </div>
+</div>
+
+
+</body>
 </html>
